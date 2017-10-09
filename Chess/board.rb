@@ -12,9 +12,9 @@ attr_accessor :grid
     @grid.each_with_index do |row, index|
       row.map! do |square|
         if [0, 1, 6, 7].include?(index)
-          Piece.new
+          Piece.new("P")
         else
-          nil
+          Piece.new("E")
         end
       end
     end
@@ -34,7 +34,12 @@ attr_accessor :grid
     raise "Not valid start position" if !self[start_pos].is_a?(Piece)
     raise "Not valid end position" if self[end_pos].is_a?(Piece)
 
-    self[start_pos],self[end_pos] = self[end_pos],self[start_pos]
+    self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
+  end
+
+  def in_bounds(n)
+    return false if !(0..7).include?(n)
+    true
   end
 
 end
