@@ -1,7 +1,7 @@
 require_relative 'piece'
 
 class Board
-attr_accessor :grid
+  attr_accessor :grid
 
   def initialize
     @grid = Array.new(8) { Array.new(8) }
@@ -9,24 +9,25 @@ attr_accessor :grid
   end
 
   def populate
-    @grid.each_with_index do |row, index|
-      row.map! do |square|
-        if [0, 1, 6, 7].include?(index)
-          Piece.new("P")
+    @grid.each_with_index do |row, x|
+      row.each_with_index do |square,y|
+        if [0, 1, 6, 7].include?(x)
+          self[[x,y]]= Piece.new("P",[x,y],self)
         else
-          Piece.new("E")
+          self[[x,y]]= Piece.new("E",[x,y],self)
         end
       end
     end
   end
 
   def [](pos)
-    x,y = pos[0],pos[1]
+    x,y = pos
     @grid[x][y]
   end
 
   def []=(pos,value)
-    x,y = pos[0],pos[1]
+
+    x,y = pos
     @grid[x][y] = value
   end
 
