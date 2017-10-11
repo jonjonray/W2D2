@@ -10,17 +10,6 @@ class Board
   end
 
   def populate
-    # @grid.each_with_index do |row, x|
-    #   row.each_with_index do |square, y|
-    #     if [0, 1].include?(x)
-    #       self[[x,y]]= Piece.new(:W, [x,y], self)
-    #     elsif [6, 7].include?(x)
-    #       self[[x,y]]= Piece.new(:B, [x,y], self)
-    #     else
-    #       self[[x,y]]= Piece.new(:N, [x,y], self)
-    #     end
-    #   end
-    # end
     @grid.each_with_index do |row, x|
       row.each_with_index do |square, y|
         if [0, 1].include?(x)
@@ -56,8 +45,6 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    p self[start_pos].current_pos
-    p self[end_pos].current_pos
     raise StandardError.new if !self[start_pos].current_moves.include?(end_pos)
     self[start_pos].current_pos = end_pos.dup
     self[end_pos].current_pos = start_pos.dup
@@ -67,10 +54,10 @@ class Board
     else
       self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
     end
-    # if in_check?(self[end_pos].color)
-    #   p "Invalid move. Move into check"
-    #   move_piece(start_pos,end_pos)
-    # end
+    if in_check?(self[end_pos].color)
+      p "Invalid move. Move into check"
+      move_piece(end_pos,start_pos)
+    end
   end
 
 

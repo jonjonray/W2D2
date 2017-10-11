@@ -17,8 +17,8 @@ class Display
         if [x, y] == @cursor.cursor_pos
           string += i.color.to_s.colorize(:background => :green)
         else
-          string += i.color.to_s.colorize(:background => :blue) if i.color == :W
-          string += i.color.to_s.colorize(:background => :red) if i.color == :B
+          string += i.class.to_s[0].colorize(:background => :blue) if i.color == :W
+          string += i.class.to_s[0].colorize(:background => :red) if i.color == :B
           string += i.color.to_s.colorize(:background => :white) if i.color == :N
         end
       end
