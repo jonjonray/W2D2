@@ -15,9 +15,11 @@ class Display
       string = ""
       line.each_with_index do |i, y|
         if [x, y] == @cursor.cursor_pos
-          string += i.value.to_s.colorize(:background => :red)
+          string += i.color.to_s.colorize(:background => :green)
         else
-          string += i.value.to_s
+          string += i.color.to_s.colorize(:background => :blue) if i.color == :W
+          string += i.color.to_s.colorize(:background => :red) if i.color == :B
+          string += i.color.to_s.colorize(:background => :white) if i.color == :N
         end
       end
       puts string

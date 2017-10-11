@@ -95,7 +95,7 @@ class Cursor
   end
 
   def update_pos(diff)
-    if @board.in_bounds(@cursor_pos[0] + MOVES[diff][0]) && @board.in_bounds(@cursor_pos[1] + MOVES[diff][1])
+    if @board.in_bounds?(@cursor_pos[0] + MOVES[diff][0]) && @board.in_bounds?(@cursor_pos[1] + MOVES[diff][1])
       @cursor_pos[0] += MOVES[diff][0]
       @cursor_pos[1] += MOVES[diff][1]
     end
